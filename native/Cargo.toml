@@ -1,0 +1,21 @@
+[package]
+name = "f1-game-udp-parser"
+version = "0.1.1"
+authors = ["msansoni <f1-game-udp-parser@michaelsansoni.com>"]
+license = "MIT"
+build = "build.rs"
+exclude = ["artifacts.json", "index.node"]
+
+[lib]
+name = "f1_game_udp_client"
+crate-type = ["cdylib"]
+
+[build-dependencies]
+neon-build = "0.3.3"
+
+[dependencies]
+neon = "0.3.3"
+nom = "5.0.1"
+neon-serde = "0.3.0"
+serde = "1.0.104"
+serde_derive = "1.0.104"

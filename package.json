@@ -1,0 +1,45 @@
+{
+  "name": "f1-game-udp-parser",
+  "version": "0.1.1",
+  "description": "Rust built Node compatible udp parser for Codemaster's Formula 1 games",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msansoni/f1-game-udp-parser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/msansoni/f1-game-udp-parser/issues"
+  },
+  "homepage": "https://github.com/msansoni/f1-game-udp-parser#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "native/src",
+    "native/Cargo.lock",
+    "native/Cargo.toml",
+    "native/build.rs",
+    "native/index.node",
+    "lib"
+  ],
+  "author": "msansoni <f1-game-udp-parser@michaelsansoni.com>",
+  "license": "MIT",
+  "dependencies": {
+    "neon-cli": "^0.3.3",
+    "node-pre-gyp": "amilajack/node-pre-gyp#neon-compat",
+    "node-pre-gyp-github": "^1.4.3"
+  },
+  "scripts": {
+    "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
+    "package": "node-pre-gyp package",
+    "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish"
+  },
+  "binary": {
+    "module_name": "index",
+    "host": "https://github.com/msansoni/f1-game-udp-parser/releases/download/",
+    "remote_path": "{version}",
+    "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
+    "module_path": "./native",
+    "pkg_path": "."
+  }
+}
