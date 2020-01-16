@@ -1,6 +1,6 @@
 [package]
 name = "f1-game-udp-parser"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["msansoni <f1-game-udp-parser@michaelsansoni.com>"]
 license = "MIT"
 build = "build.rs"
