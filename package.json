@@ -1,6 +1,6 @@
 {
   "name": "f1-game-udp-parser",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Rust built Node compatible udp parser for Codemaster's Formula 1 games",
   "main": "lib/index.js",
   "repository": {
@@ -36,10 +36,7 @@
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
-    "fix": "gts fix",
-    "prepare": "npm run compile",
-    "pretest": "npm run compile",
-    "posttest": "npm run check"
+    "fix": "gts fix"
   },
   "binary": {
     "module_name": "index",
