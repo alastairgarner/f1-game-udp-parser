@@ -15,7 +15,7 @@ const TRACKS = require('./tracks');
 const TYRES = require('./tyres');
 const WEATHER = require('./weather');
 
-module.exports = {
+export {
   BUTTON_FLAGS,
   DRIVERS,
   ERAS,
@@ -31,5 +31,5 @@ module.exports = {
   TEAMS,
   TRACKS,
   TYRES,
-  WEATHER
+  WEATHER,
 };

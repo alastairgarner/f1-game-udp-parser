@@ -1,22 +1,29 @@
-const parser = require('../native/index.node');
-const dgram = require('dgram');
-const EventEmitter = require('events');
+import * as dgram from 'dgram';
+import * as constants from './constants';
 
-const constants = require('./constants');
+import EventEmitter from 'events';
+
+import { AddressInfo } from 'net';
+import { Options } from './types';
+
+const parser = require('../native/index.node');
 
 const DEFAULT_PORT = 20777;
 
 class TelemetryClient extends EventEmitter {
-  constructor(opts = {}) {
+  port: number;
+  socket: dgram.Socket | undefined;
+
+  constructor(opts: Options = {}) {
     super();
 
-    const {port = DEFAULT_PORT} = opts;
+    const { port = DEFAULT_PORT } = opts;
 
     this.port = port;
     this.socket = dgram.createSocket('udp4');
   }
 
-  parseMessage(m) {
+  parseMessage(m: Buffer) {
     const message = parser.parseMessage(m);
     this.emit(message.packetType, message.packetData[message.packetType]);
   }
@@ -31,13 +38,12 @@ class TelemetryClient extends EventEmitter {
         return;
       }
 
-      const address = this.socket.address();
-      console.log(
-          `UDP socket listening on ${address.address}:${address.port}`);
+      const address: AddressInfo = this.socket.address() as AddressInfo;
+      console.log(`UDP socket listening on ${address.address}:${address.port}`);
       this.socket.setBroadcast(true);
     });
 
-    this.socket.on('message', m => this.parseMessage(m));
+    this.socket.on('message', this.parseMessage);
     this.socket.bind(this.port);
   }
 
@@ -53,5 +59,4 @@ class TelemetryClient extends EventEmitter {
   }
 }
 
-exports.TelemetryClient = TelemetryClient;
-exports.constants = constants;
+export { TelemetryClient, constants };
