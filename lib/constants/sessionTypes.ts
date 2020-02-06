@@ -1,4 +1,6 @@
-const SESSION_TYPES = [
+import { SessionType } from './types';
+
+export const SESSION_TYPES: SessionType[] = [
   'Unknown',
   'P1',
   'P2',
@@ -13,5 +15,3 @@ const SESSION_TYPES = [
   'R2',
   'Time Trial',
 ];
-
-module.exports = SESSION_TYPES;

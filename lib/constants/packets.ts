@@ -1,4 +1,6 @@
-const PACKETS = {
+import { Packets } from './types';
+
+export const PACKETS: Packets = {
   MotionData: 'MotionData',
   SessionData: 'SessionData',
   LapData: 'LapData',
@@ -8,5 +10,3 @@ const PACKETS = {
   CarTelemetryData: 'CarTelemetryData',
   CarStatusData: 'CarStatusData',
 };
-
-module.exports = PACKETS;

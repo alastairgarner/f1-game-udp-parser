@@ -1,4 +1,6 @@
-const WEATHER = [
+import { Weather } from './types';
+
+export const WEATHER: Weather[] = [
   'Clear',
   'Light Cloud',
   'Overcast',
@@ -6,5 +8,3 @@ const WEATHER = [
   'Heavy Rain',
   'Storm',
 ];
-
-module.exports = WEATHER;
