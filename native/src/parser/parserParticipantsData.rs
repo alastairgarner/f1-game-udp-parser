@@ -21,7 +21,7 @@ named!(pub parse_participant<&[u8], ParticipantData>,
         m_teamId: le_u8 >>
         m_raceNumber: le_u8 >>
         m_nationality: le_u8 >>
-        m_name: map_res!(take!(24), str::from_utf8) >>
+        m_name: map_res!(take!(48), str::from_utf8) >>
         m_yourTelemetry: le_u8 >>
         (ParticipantData {
             m_aiControlled: m_aiControlled,
@@ -29,7 +29,6 @@ named!(pub parse_participant<&[u8], ParticipantData>,
             m_teamId: m_teamId,
             m_raceNumber: m_raceNumber,
             m_nationality: m_nationality,
-            //.trim_end_matches(char::from(0)).to_string(),
             m_name: m_name.to_string(),
             m_yourTelemetry: m_yourTelemetry
         })
