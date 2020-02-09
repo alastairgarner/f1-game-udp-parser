@@ -1,6 +1,4 @@
-import { SafetyCarStatus } from './types';
-
-export const SAFETY_CAR_STATUSES: SafetyCarStatus[] = [
+export const SAFETY_CAR_STATUSES: string[] = [
   'No Safety Car',
   'Full Safety Car',
   'Virtual Safety Car',

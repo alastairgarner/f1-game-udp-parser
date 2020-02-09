@@ -1,6 +1,4 @@
-import { ERSDeployMode } from './types';
-
-export const ERS_DEPLOY_MODE: ERSDeployMode[] = [
+export const ERS_DEPLOY_MODE: string[] = [
   'None',
   'Low',
   'Medium',

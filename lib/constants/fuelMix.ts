@@ -1,3 +1,1 @@
-import { FuelMix } from './types';
-
-export const FUEL_MIX: FuelMix[] = ['Lean', 'Standard', 'Rich', 'Max'];
+export const FUEL_MIX: string[] = ['Lean', 'Standard', 'Rich', 'Max'];

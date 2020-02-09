@@ -1,6 +1,4 @@
-import { Surface } from './types';
-
-export const SURFACES: Surface[] = [
+export const SURFACES: string[] = [
   'Tarmac',
   'Rumble strip',
   'Concrete',

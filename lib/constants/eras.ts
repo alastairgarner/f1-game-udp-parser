@@ -1,3 +1,1 @@
-import { Era } from './types';
-
-export const ERAS: Era[] = ['Modern', 'Classic'];
+export const ERAS: string[] = ['Modern', 'Classic'];

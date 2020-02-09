@@ -1,6 +1,4 @@
-import { Nationality } from './types';
-
-export const NATIONALITIES: Nationality[] = [
+export const NATIONALITIES: string[] = [
   'American',
   'Argentinean',
   'Australian',

@@ -1,3 +1,1 @@
-import { Formula } from './types';
-
-export const FORMULAS: Formula[] = ['F1 Modern', 'F1 Classic', 'F2'];
+export const FORMULAS: string[] = ['F1 Modern', 'F1 Classic', 'F2'];

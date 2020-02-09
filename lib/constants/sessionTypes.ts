@@ -1,6 +1,4 @@
-import { SessionType } from './types';
-
-export const SESSION_TYPES: SessionType[] = [
+export const SESSION_TYPES: string[] = [
   'Unknown',
   'P1',
   'P2',
