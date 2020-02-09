@@ -35,7 +35,9 @@
     "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish",
     "check": "gts check",
     "clean": "gts clean",
+    "prebuild": "rm -rf ./build",
     "build": "tsc",
+    "postbuild": "mv ./build/lib/* ./build/ && rm -rf ./build/lib",
     "fix": "gts fix"
   },
   "binary": {
