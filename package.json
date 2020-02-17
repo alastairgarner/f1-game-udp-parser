@@ -25,6 +25,8 @@
   "author": "msansoni <f1-game-udp-parser@michaelsansoni.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/jest": "^25.1.2",
+    "jest": "^25.1.0",
     "neon-cli": "^0.3.3",
     "node-pre-gyp": "amilajack/node-pre-gyp#neon-compat",
     "node-pre-gyp-github": "^1.4.3"
@@ -35,6 +37,7 @@
     "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish",
     "check": "gts check",
     "clean": "gts clean",
+    "test": "jest",
     "prebuild": "rm -rf ./build",
     "build": "tsc",
     "postbuild": "mv ./build/lib/* ./build/ && rm -rf ./build/lib",

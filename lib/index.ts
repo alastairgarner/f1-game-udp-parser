@@ -8,7 +8,7 @@ import { Options } from './types';
 
 const parser = require('../native/index.node');
 
-const DEFAULT_PORT = 20777;
+export const DEFAULT_PORT = 20777;
 
 class TelemetryClient extends EventEmitter {
   port: number;
