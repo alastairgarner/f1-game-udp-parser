@@ -25,8 +25,6 @@
   "author": "msansoni <f1-game-udp-parser@michaelsansoni.com>",
   "license": "MIT",
   "dependencies": {
-    "@types/jest": "^25.1.2",
-    "jest": "^25.1.0",
     "neon-cli": "^0.3.3",
     "node-pre-gyp": "amilajack/node-pre-gyp#neon-compat",
     "node-pre-gyp-github": "^1.4.3"
@@ -52,8 +50,11 @@
     "pkg_path": "."
   },
   "devDependencies": {
+    "@types/node": "^10.0.3",
+    "@types/jest": "^25.1.2",
     "gts": "^1.1.2",
-    "typescript": "~3.7.0",
-    "@types/node": "^10.0.3"
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.0",
+    "typescript": "~3.7.0"
   }
 }
