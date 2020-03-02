@@ -2,7 +2,7 @@
   "name": "f1-game-udp-parser",
   "version": "0.1.4",
   "description": "Rust built Node compatible udp parser for Codemaster's Formula 1 games",
-  "main": "build/lib/index.js",
+  "main": "build/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/msansoni/f1-game-udp-parser.git"
@@ -20,7 +20,7 @@
     "native/Cargo.toml",
     "native/build.rs",
     "native/index.node",
-    "build/lib"
+    "build"
   ],
   "author": "msansoni <f1-game-udp-parser@michaelsansoni.com>",
   "license": "MIT",
