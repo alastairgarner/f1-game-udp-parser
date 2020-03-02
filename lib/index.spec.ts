@@ -126,6 +126,20 @@ describe('F1 Game UDP Parser', () => {
       });
     });
 
+    describe('ParticipantsData', () => {
+      beforeAll(() => {
+        buffer = Buffer.from(PACKET_PARTICIPANTS_DATA_BUFFER);
+      });
+
+      it('should parse message', () => {
+        telemetryClient.parseMessage(buffer);
+        expect(EventEmitter.prototype.emit).toHaveBeenCalledWith(
+          'ParticipantsData',
+          PACKET_PARTICIPANTS_DATA_PARSED
+        );
+      });
+    });
+
     xdescribe('CarTelemetryData', () => {
       beforeAll(() => {
         buffer = Buffer.from(PACKET_CAR_TELEMETRY_DATA_BUFFER);
@@ -136,20 +150,6 @@ describe('F1 Game UDP Parser', () => {
         expect(EventEmitter.prototype.emit).toHaveBeenCalledWith(
           'CarTelemetryData',
           PACKET_CAR_TELEMETRY_DATA_PARSED
-        );
-      });
-    });
-
-    xdescribe('ParticipantsData', () => {
-      beforeAll(() => {
-        buffer = Buffer.from(PACKET_PARTICIPANTS_DATA_BUFFER);
-      });
-
-      it('should parse message', () => {
-        telemetryClient.parseMessage(buffer);
-        expect(EventEmitter.prototype.emit).toHaveBeenCalledWith(
-          'ParticipantsData',
-          PACKET_PARTICIPANTS_DATA_PARSED
         );
       });
     });
