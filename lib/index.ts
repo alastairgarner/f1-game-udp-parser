@@ -1,7 +1,7 @@
 import * as dgram from 'dgram';
 import * as constants from './constants';
 
-import EventEmitter from 'events';
+import { EventEmitter } from 'events';
 
 import { AddressInfo } from 'net';
 import { Options } from './types';
@@ -43,7 +43,7 @@ class TelemetryClient extends EventEmitter {
       this.socket.setBroadcast(true);
     });
 
-    this.socket.on('message', this.parseMessage);
+    this.socket.on('message', m => this.parseMessage(m));
     this.socket.bind(this.port);
   }
 

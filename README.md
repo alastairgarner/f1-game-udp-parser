@@ -12,18 +12,28 @@ The purpose of this project was to port [Jonathan Bursztyn's](https://github.com
 ## Installing
 
 ```
-$ npm install f1-telemetry-client
+$ npm install f1-game-udp-parser
 ```
 
 or
 
 ```
-$ yarn add f1-telemetry-client
+$ yarn add f1-game-udp-parser
 ```
 
 ### Rebuilding the module
 
 This module is developed in Rust and interfaces with Node as a Node Native Module. Travis-CI is used to package and distribute targeted binaries for operating system and node version. The build targets are currently set to Windows, OSX and Linux, supporting Node 12 (LTS) and the current node release. In some cases a targeted binary will not exist for your OS and node combination, or you'll want to use the package in an Electron application. Therefore you need to build the module from source. This will require Rust to be installed on the client machine and Node build tools - [guide here](https://neon-bindings.com/docs/getting-started/).
+
+Run the follow commands to build the package:
+
+```
+$ npm i
+$ npm run install
+$ npm run build
+```
+
+You can then execute `$ npm pack` to generate a .tgz file that you can install in a local project for trying out the library.
 
 ## Usage
 
