@@ -29,7 +29,7 @@ named!(pub parse_participant<&[u8], ParticipantData>,
             m_teamId: m_teamId,
             m_raceNumber: m_raceNumber,
             m_nationality: m_nationality,
-            m_name: m_name.to_string(),
+            m_name: m_name.trim_matches(char::from(0)).to_string(),
             m_yourTelemetry: m_yourTelemetry
         })
     )

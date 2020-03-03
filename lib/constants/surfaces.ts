@@ -1,4 +1,4 @@
-const SURFACES = [
+export const SURFACES: string[] = [
   'Tarmac',
   'Rumble strip',
   'Concrete',
@@ -12,5 +12,3 @@ const SURFACES = [
   'Metal',
   'Ridged',
 ];
-
-module.exports = SURFACES;

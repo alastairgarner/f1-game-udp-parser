@@ -1,4 +1,6 @@
-const EVENT_CODES = {
+import { EventCodes } from './types';
+
+export const EVENT_CODES: EventCodes = {
   SessionStarted: 'SSTA',
   SessionEnded: 'SEND',
   FastestLap: 'FTLP',
@@ -9,5 +11,3 @@ const EVENT_CODES = {
   ChequeredFlag: 'CHQF',
   RaceWinner: 'RCWN',
 };
-
-module.exports = EVENT_CODES;

@@ -1,4 +1,4 @@
-const ERS_DEPLOY_MODE = [
+export const ERS_DEPLOY_MODE: string[] = [
   'None',
   'Low',
   'Medium',
@@ -6,5 +6,3 @@ const ERS_DEPLOY_MODE = [
   'Overtake',
   'Hotlap',
 ];
-
-module.exports = ERS_DEPLOY_MODE;

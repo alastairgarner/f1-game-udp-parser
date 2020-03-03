@@ -1,4 +1,4 @@
-const WEATHER = [
+export const WEATHER: string[] = [
   'Clear',
   'Light Cloud',
   'Overcast',
@@ -6,5 +6,3 @@ const WEATHER = [
   'Heavy Rain',
   'Storm',
 ];
-
-module.exports = WEATHER;

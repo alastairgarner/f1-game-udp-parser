@@ -1,4 +1,5 @@
 # F1 Game UDP Parser
+
 ![Travis (.com)](https://img.shields.io/travis/com/msansoni/f1-game-udp-parser?style=for-the-badge)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/msansoni/f1-game-udp-parser?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/msansoni/f1-game-udp-parser?style=for-the-badge)
@@ -9,15 +10,30 @@ This project leverages [Rust](https://www.rust-lang.org/)'s performance to speed
 The purpose of this project was to port [Jonathan Bursztyn's](https://github.com/jonybur) comprehensive TypeScript parser [f1-telemetry-client](https://github.com/jonybur/f1-telemetry-client) into [Rust](https://www.rust-lang.org/) and [neon](https://neon-bindings.com/) in order to create a native node module, in an effort to speed up the packet parsing, which becomes a bottle neck at 60Hz using JS Binary-Parser. There are also some limitations in JS's binary-parser, especially when handling 64bit integers. Benchmarks locally show a 10x speed up parsing packets using the Rust implementation over JS Binary-Parser.
 
 ## Installing
+
 ```
-$ npm install f1-telemetry-client
+$ npm install f1-game-udp-parser
 ```
+
 or
+
 ```
-$ yarn add f1-telemetry-client
+$ yarn add f1-game-udp-parser
 ```
+
 ### Rebuilding the module
+
 This module is developed in Rust and interfaces with Node as a Node Native Module. Travis-CI is used to package and distribute targeted binaries for operating system and node version. The build targets are currently set to Windows, OSX and Linux, supporting Node 12 (LTS) and the current node release. In some cases a targeted binary will not exist for your OS and node combination, or you'll want to use the package in an Electron application. Therefore you need to build the module from source. This will require Rust to be installed on the client machine and Node build tools - [guide here](https://neon-bindings.com/docs/getting-started/).
+
+Run the follow commands to build the package:
+
+```
+$ npm i
+$ npm run install
+$ npm run build
+```
+
+You can then execute `$ npm pack` to generate a .tgz file that you can install in a local project for trying out the library.
 
 ## Usage
 
@@ -53,6 +69,7 @@ This project has been developed from [jonybur's](https://github.com/jonybur) [f1
 All of which are licensed under the MIT License, as is this project.
 
 ## ToDo
-- [ ] Convert JS interop to TypeScript
+
+- [x] Convert JS interop to TypeScript
 - [ ] Move UDP socket and EventEmitter to Rust
 - [ ] Improve packet dependent logic inside Rust parser

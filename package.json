@@ -2,7 +2,7 @@
   "name": "f1-game-udp-parser",
   "version": "0.1.4",
   "description": "Rust built Node compatible udp parser for Codemaster's Formula 1 games",
-  "main": "lib/index.js",
+  "main": "build/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/msansoni/f1-game-udp-parser.git"
@@ -20,7 +20,7 @@
     "native/Cargo.toml",
     "native/build.rs",
     "native/index.node",
-    "lib"
+    "build"
   ],
   "author": "msansoni <f1-game-udp-parser@michaelsansoni.com>",
   "license": "MIT",
@@ -32,7 +32,14 @@
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
     "package": "node-pre-gyp package",
-    "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish"
+    "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish",
+    "check": "gts check",
+    "clean": "gts clean",
+    "test": "jest",
+    "prebuild": "rm -rf ./build",
+    "build": "tsc",
+    "postbuild": "mv ./build/lib/* ./build/ && rm -rf ./build/lib",
+    "fix": "gts fix"
   },
   "binary": {
     "module_name": "index",
@@ -41,5 +48,13 @@
     "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
     "module_path": "./native",
     "pkg_path": "."
+  },
+  "devDependencies": {
+    "@types/node": "^10.0.3",
+    "@types/jest": "^25.1.2",
+    "gts": "^1.1.2",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.0",
+    "typescript": "~3.7.0"
   }
 }

@@ -1,4 +1,6 @@
-const BUTTON_FLAGS = {
+import { ButtonFlags } from './types';
+
+export const BUTTON_FLAGS: ButtonFlags = {
   0x0001: 'Cross or A',
   0x0002: 'Triangle or Y',
   0x0004: 'Circle or B',
@@ -15,5 +17,3 @@ const BUTTON_FLAGS = {
   0x2000: 'Left Stick Click',
   0x4000: 'Right Stick Click',
 };
-
-module.exports = BUTTON_FLAGS;
