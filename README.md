@@ -70,7 +70,5 @@ All of which are licensed under the MIT License, as is this project.
 
 ## ToDo
 
-- [x] Convert JS interop to TypeScript
-- [ ] Fix CarTelemetryData parser
 - [ ] Move UDP socket and EventEmitter to Rust
 - [ ] Improve packet dependent logic inside Rust parser
