@@ -33,7 +33,7 @@
       "name": "Jonathan Bursztyn",
       "email": "jonathan@bursztyn.io",
       "url": "bursztyn.io"
-    },
+    }
   ],
   "license": "MIT",
   "dependencies": {
