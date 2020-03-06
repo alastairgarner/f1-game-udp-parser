@@ -25,6 +25,7 @@ named!(pub parse_car_telemetry_data<&[u8], CarTelemetryData>,
         m_speed: le_u16 >>
         m_throttle: le_f32 >>
         m_steer: le_f32 >>
+        m_brake: le_f32 >>
         m_clutch: le_u8 >>
         m_gear: le_i8 >>
         m_engineRPM: le_u16 >>
@@ -40,6 +41,7 @@ named!(pub parse_car_telemetry_data<&[u8], CarTelemetryData>,
             m_speed: m_speed,
             m_throttle: m_throttle,
             m_steer: m_steer,
+            m_brake: m_brake,
             m_clutch: m_clutch,
             m_gear: m_gear,
             m_engineRPM: m_engineRPM,
