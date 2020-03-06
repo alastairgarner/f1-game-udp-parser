@@ -1,8 +1,8 @@
 # F1 Game UDP Parser
 
-![Travis (.com)](https://img.shields.io/travis/com/msansoni/f1-game-udp-parser?style=for-the-badge)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/msansoni/f1-game-udp-parser?style=for-the-badge)
-![GitHub](https://img.shields.io/github/license/msansoni/f1-game-udp-parser?style=for-the-badge)
+![Travis (.com)](https://img.shields.io/travis/com/race-hub/f1-game-udp-parser?style=for-the-badge)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/race-hub/f1-game-udp-parser?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/race-hub/f1-game-udp-parser?style=for-the-badge)
 
 The F1 series of games by Codemasters outputs a data stream via UDP. This data can be used for external displays, HUDs or performance analysis.
 This project leverages [Rust](https://www.rust-lang.org/)'s performance to speed up packet parsing to cope with higher frequency (60Hz) UDP streams from the game.
