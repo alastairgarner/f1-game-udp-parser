@@ -1,7 +1,7 @@
 [package]
 name = "f1-game-udp-parser"
-version = "0.1.4"
-authors = ["msansoni <f1-game-udp-parser@michaelsansoni.com>"]
+version = "0.1.5"
+authors = ["msansoni <f1-game-udp-parser@michaelsansoni.com>", "jonybur <jonathan@bursztyn.io>"]
 license = "MIT"
 build = "build.rs"
 exclude = ["artifacts.json", "index.node"]

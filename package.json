@@ -1,16 +1,16 @@
 {
   "name": "f1-game-udp-parser",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Rust built Node compatible udp parser for Codemaster's Formula 1 games",
   "main": "build/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/msansoni/f1-game-udp-parser.git"
+    "url": "git+https://github.com/race-hub/f1-game-udp-parser.git"
   },
   "bugs": {
-    "url": "https://github.com/msansoni/f1-game-udp-parser/issues"
+    "url": "https://github.com/race-hub/f1-game-udp-parser/issues"
   },
-  "homepage": "https://github.com/msansoni/f1-game-udp-parser#readme",
+  "homepage": "https://github.com/race-hub/f1-game-udp-parser#readme",
   "directories": {
     "lib": "lib"
   },
@@ -23,6 +23,18 @@
     "build"
   ],
   "author": "msansoni <f1-game-udp-parser@michaelsansoni.com>",
+  "contributors": [
+    {
+      "name": "Michael Sansoni",
+      "email": "f1-game-upd-parser@michaelsansoni.com",
+      "url": "michaelsansoni.com"
+    },
+    {
+      "name": "Jonathan Bursztyn",
+      "email": "jonathan@bursztyn.io",
+      "url": "bursztyn.io"
+    },
+  ],
   "license": "MIT",
   "dependencies": {
     "neon-cli": "^0.3.3",
