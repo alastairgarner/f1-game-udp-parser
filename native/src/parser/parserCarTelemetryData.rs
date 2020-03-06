@@ -7,6 +7,7 @@ pub struct CarTelemetryData {
     pub m_speed: u16,
     pub m_throttle: f32,
     pub m_steer: f32,
+    pub m_brake: f32,
     pub m_clutch: u8,
     pub m_gear: i8,
     pub m_engineRPM: u16,

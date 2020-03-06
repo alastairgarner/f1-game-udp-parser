@@ -140,7 +140,7 @@ describe('F1 Game UDP Parser', () => {
       });
     });
 
-    xdescribe('CarTelemetryData', () => {
+    describe('CarTelemetryData', () => {
       beforeAll(() => {
         buffer = Buffer.from(PACKET_CAR_TELEMETRY_DATA_BUFFER);
       });
