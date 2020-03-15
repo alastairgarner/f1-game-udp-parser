@@ -42,7 +42,7 @@ import { TelemetryClient, constants } from "f1-game-udp-parser";
 // or: const { TelemetryClient, constants } = require('f1-game-udp-parser');
 const { PACKETS } = constants;
 
-const client = new F1TelemetryClient();
+const client = new TelemetryClient();
 client.on(PACKETS.MotionData, console.log);
 client.on(PACKETS.SessionData, console.log);
 client.on(PACKETS.LapData, console.log);
