@@ -55,7 +55,7 @@
   },
   "binary": {
     "module_name": "index",
-    "host": "https://github.com/msansoni/f1-game-udp-parser/releases/download/",
+    "host": "https://github.com/race-hub/f1-game-udp-parser/releases/download/",
     "remote_path": "{version}",
     "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
     "module_path": "./native",
