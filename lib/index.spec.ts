@@ -68,8 +68,7 @@ describe('F1 Game UDP Parser', () => {
 
   describe('parseMessage', () => {
     let telemetryClient: TelemetryClient;
-    // tslint:disable-next-line: no-any
-    let buffer: any;
+    let buffer: Buffer;
 
     beforeEach(() => {
       telemetryClient = new TelemetryClient();
