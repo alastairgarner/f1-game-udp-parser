@@ -1,4 +1,8 @@
-import { TelemetryClient, DEFAULT_PORT } from './index';
+import {
+  TelemetryClient,
+  DEFAULT_PORT,
+  CLIENT_STARTED_ERROR_MESSAGE,
+} from './index';
 import { EventEmitter } from 'events';
 import {
   PACKET_CAR_SETUP_DATA_BUFFER,
@@ -28,8 +32,6 @@ describe('F1 Game UDP Parser', () => {
 
       it('should set default port and should set up client', () => {
         expect(telemetryClient.port).toBe(4477);
-        // tslint:disable-next-line: no-any
-        expect((telemetryClient.socket as any).type).toBe('udp4');
       });
     });
 
@@ -40,8 +42,26 @@ describe('F1 Game UDP Parser', () => {
 
       it('should set default port and should set up client', () => {
         expect(telemetryClient.port).toBe(DEFAULT_PORT);
-        // tslint:disable-next-line: no-any
-        expect((telemetryClient.socket as any).type).toBe('udp4');
+      });
+    });
+  });
+
+  describe('start', () => {
+    let telemetryClient: TelemetryClient;
+
+    beforeAll(() => {
+      telemetryClient = new TelemetryClient();
+      telemetryClient.start();
+    });
+
+    it('should initialize socket', () => {
+      // tslint:disable-next-line: no-any
+      expect((telemetryClient.socket as any).type).toBe('udp4');
+    });
+
+    describe('when trying to start it again', () => {
+      it('should throw an error for already being initialized', () => {
+        expect(telemetryClient.start).toThrow(CLIENT_STARTED_ERROR_MESSAGE);
       });
     });
   });
