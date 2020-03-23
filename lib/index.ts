@@ -33,26 +33,7 @@ class TelemetryClient extends EventEmitter {
       throw CLIENT_STARTED_ERROR_MESSAGE;
     }
 
-    this.socket = dgram.createSocket('udp4', () => {
-      this.initializeSocket();
-    });
-  }
-
-  stop() {
-    if (!this.socket) {
-      return;
-    }
-
-    return this.socket.close(() => {
-      console.log(`UDP socket closed`);
-      this.socket = undefined;
-    });
-  }
-
-  private initializeSocket() {
-    if (!this.socket) {
-      return;
-    }
+    this.socket = dgram.createSocket('udp4');
 
     this.socket.on('listening', () => {
       if (!this.socket) {
@@ -65,7 +46,19 @@ class TelemetryClient extends EventEmitter {
     });
 
     this.socket.on('message', m => this.parseMessage(m));
+
     this.socket.bind(this.port);
+  }
+
+  stop() {
+    if (!this.socket) {
+      return;
+    }
+
+    return this.socket.close(() => {
+      console.log(`UDP socket closed`);
+      this.socket = undefined;
+    });
   }
 }
 
