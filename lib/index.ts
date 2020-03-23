@@ -9,6 +9,7 @@ import { Options } from './types';
 const parser = require('../native/index.node');
 
 export const DEFAULT_PORT = 20777;
+export const CLIENT_STARTED_ERROR_MESSAGE = 'Client was already started';
 
 class TelemetryClient extends EventEmitter {
   port: number;
@@ -20,7 +21,6 @@ class TelemetryClient extends EventEmitter {
     const { port = DEFAULT_PORT } = opts;
 
     this.port = port;
-    this.socket = dgram.createSocket('udp4');
   }
 
   parseMessage(m: Buffer) {
@@ -29,9 +29,11 @@ class TelemetryClient extends EventEmitter {
   }
 
   start() {
-    if (!this.socket) {
-      return;
+    if (!!this.socket) {
+      throw CLIENT_STARTED_ERROR_MESSAGE;
     }
+
+    this.socket = dgram.createSocket('udp4');
 
     this.socket.on('listening', () => {
       if (!this.socket) {
