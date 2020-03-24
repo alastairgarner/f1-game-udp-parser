@@ -49,9 +49,10 @@ describe('F1 Game UDP Parser', () => {
   describe('start', () => {
     let telemetryClient: TelemetryClient;
 
-    beforeAll(() => {
-      telemetryClient = new TelemetryClient();
+    beforeAll(done => {
+      telemetryClient = new TelemetryClient({ verbose: false });
       telemetryClient.start();
+      done();
     });
 
     it('should initialize socket', () => {

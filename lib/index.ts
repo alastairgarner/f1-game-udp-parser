@@ -14,13 +14,15 @@ export const CLIENT_STARTED_ERROR_MESSAGE = 'Client was already started';
 class TelemetryClient extends EventEmitter {
   port: number;
   socket: dgram.Socket | undefined;
+  verbose: boolean;
 
   constructor(opts: Options = {}) {
     super();
 
-    const { port = DEFAULT_PORT } = opts;
+    const { port = DEFAULT_PORT, verbose = true } = opts;
 
     this.port = port;
+    this.verbose = verbose;
   }
 
   parseMessage(m: Buffer) {
@@ -41,7 +43,13 @@ class TelemetryClient extends EventEmitter {
       }
 
       const address: AddressInfo = this.socket.address() as AddressInfo;
-      console.log(`UDP socket listening on ${address.address}:${address.port}`);
+
+      if (this.verbose) {
+        console.log(
+          `UDP socket listening on ${address.address}:${address.port}`
+        );
+      }
+
       this.socket.setBroadcast(true);
     });
 
@@ -56,7 +64,10 @@ class TelemetryClient extends EventEmitter {
     }
 
     return this.socket.close(() => {
-      console.log(`UDP socket closed`);
+      if (this.verbose) {
+        console.log(`UDP socket closed`);
+      }
+
       this.socket = undefined;
     });
   }
