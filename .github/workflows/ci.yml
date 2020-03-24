@@ -10,6 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest, windows-2019, ubuntu-18.04]
+        node: [ '13', '12' ]
 
     steps:
       - name: Check out Git repository
@@ -18,7 +19,7 @@ jobs:
       - name: Install Node.js and NPM
         uses: actions/setup-node@v1
         with:
-          node-version: 13
+          node-version: ${{ matrix.node }}
 
       - name: npm install
         run: |
