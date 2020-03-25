@@ -46,15 +46,9 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Create artifact path
-        id: create_artifact_path
+      - name: Get node environment variables
+        id: get_node_environment
         uses: msansoni/node-environment-action@v1
-
-      - name: Test the artifact path
-        run: |
-          echo "The time was ${{ steps.create_artifact_path.outputs.platform }}"
-          echo "The time was ${{ steps.create_artifact_path.outputs.arch }}"
-          echo "The time was ${{ steps.create_artifact_path.outputs.node_module_version }}"
 
       - name: Upload Release Asset
         id: upload-release-asset
@@ -63,6 +57,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./node-v${{ steps.create_artifact_path.outputs.node_module_version }}-${{ steps.create_artifact_path.outputs.platform }}-${{ steps.create_artifact_path.outputs.arch }}.tar.gz
-          asset_name: node-v${{ steps.create_artifact_path.outputs.node_module_version }}-${{ steps.create_artifact_path.outputs.platform }}-${{ steps.create_artifact_path.outputs.arch }}.tar.gz
+          asset_path: ${{ format('./build/stage/{0}/node-v{1}-{2}-{3}.tar.gz', github.ref, steps.get_node_environment.outputs.node_module_version, steps.get_node_environment.outputs.platform, steps.get_node_environment.outpus.arch }}
+          asset_name: ${{ format('build/stage/{0}/node-v{1}-{2}-{3}.tar.gz', github.ref, steps.get_node_environment.outputs.node_module_version, steps.get_node_environment.outputs.platform, steps.get_node_environment.outpus.arch }}
           asset_content_type: application/gzip
