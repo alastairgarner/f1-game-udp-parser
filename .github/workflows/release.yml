@@ -52,7 +52,7 @@ jobs:
 
       - name: Get package version
         id: package_version
-        uses: MontyD/package-json-updated-action
+        uses: MontyD/package-json-updated-action@v1
 
       - name: Upload Release Asset
         id: upload-release-asset
