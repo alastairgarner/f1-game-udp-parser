@@ -1,6 +1,6 @@
 {
   "name": "f1-game-udp-parser",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Rust built Node compatible udp parser for Codemaster's Formula 1 games",
   "main": "build/index.js",
   "repository": {
@@ -15,10 +15,6 @@
     "lib": "lib"
   },
   "files": [
-    "native/src",
-    "native/Cargo.lock",
-    "native/Cargo.toml",
-    "native/build.rs",
     "native/index.node",
     "build"
   ],
@@ -38,8 +34,7 @@
   "license": "MIT",
   "dependencies": {
     "neon-cli": "^0.3.3",
-    "node-pre-gyp": "amilajack/node-pre-gyp#neon-compat",
-    "node-pre-gyp-github": "^1.4.3"
+    "node-pre-gyp": "amilajack/node-pre-gyp#neon-compat"
   },
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
