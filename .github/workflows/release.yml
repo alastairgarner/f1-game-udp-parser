@@ -48,10 +48,13 @@ jobs:
 
       - name: Create artifact path
         id: create_artifact_path
+        uses: msansoni/node-environment-action@v1
+
+      - name: Test the artifact path
         run: |
-          echo '##[set-ouput name=node_module_version;]$(node -e "a=process.versions.modules; console.log(a);"'
-          echo '##[set-ouput name=platform;]$(node -e "a=process.platform; console.log(a);"'
-          echo '##[set-ouput name=arch;]$(node -e "a=process.arch; console.log(a);"'
+          echo "The time was ${{ steps.create_artifact_path.outputs.platform }}"
+          echo "The time was ${{ steps.create_artifact_path.outputs.arch }}"
+          echo "The time was ${{ steps.create_artifact_path.outputs.node_module_version }}"
 
       - name: Upload Release Asset
         id: upload-release-asset
