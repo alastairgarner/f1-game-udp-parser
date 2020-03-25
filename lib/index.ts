@@ -15,6 +15,7 @@ class TelemetryClient extends EventEmitter {
   port: number;
   socket: dgram.Socket | undefined;
   verbose: boolean;
+  isRunning: boolean;
 
   constructor(opts: Options = {}) {
     super();
@@ -23,6 +24,7 @@ class TelemetryClient extends EventEmitter {
 
     this.port = port;
     this.verbose = verbose;
+    this.isRunning = false;
   }
 
   parseMessage(m: Buffer) {
@@ -31,7 +33,7 @@ class TelemetryClient extends EventEmitter {
   }
 
   start() {
-    if (!this || !!this.socket) {
+    if (this.isRunning) {
       throw CLIENT_STARTED_ERROR_MESSAGE;
     }
 
@@ -56,20 +58,27 @@ class TelemetryClient extends EventEmitter {
     this.socket.on('message', m => this.parseMessage(m));
 
     this.socket.bind(this.port);
+
+    this.isRunning = true;
   }
 
   stop() {
-    if (!this.socket) {
+    if (!this.isRunning) {
       return;
     }
 
-    return this.socket.close(() => {
-      if (this.verbose) {
-        console.log(`UDP socket closed`);
-      }
+    return (
+      this.socket &&
+      this.socket.close(() => {
+        if (this.verbose) {
+          console.log(`UDP socket closed`);
+        }
 
-      this.socket = undefined;
-    });
+        this.socket = undefined;
+
+        this.isRunning = false;
+      })
+    );
   }
 }
 

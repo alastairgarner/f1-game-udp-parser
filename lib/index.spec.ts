@@ -49,21 +49,33 @@ describe('F1 Game UDP Parser', () => {
   describe('start', () => {
     let telemetryClient: TelemetryClient;
 
-    beforeAll(done => {
+    beforeAll(() => {
       telemetryClient = new TelemetryClient({ verbose: false });
-      telemetryClient.start();
-      done();
     });
 
-    it('should initialize socket', () => {
-      // tslint:disable-next-line: no-any
-      expect((telemetryClient.socket as any).type).toBe('udp4');
+    describe('when starting client', () => {
+      beforeAll(done => {
+        telemetryClient.start();
+        done();
+      });
+
+      it('should initialize socket', () => {
+        // tslint:disable-next-line: no-any
+        expect((telemetryClient.socket as any).type).toBe('udp4');
+        expect(telemetryClient.isRunning).toBe(true);
+      });
     });
 
     describe('when trying to start it again', () => {
       it('should throw an error for already being initialized', () => {
-        expect(telemetryClient.start).toThrow(CLIENT_STARTED_ERROR_MESSAGE);
+        expect(() => telemetryClient.start()).toThrow(
+          CLIENT_STARTED_ERROR_MESSAGE
+        );
       });
+    });
+
+    afterAll(() => {
+      telemetryClient.stop();
     });
   });
 
