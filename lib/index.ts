@@ -9,18 +9,22 @@ import { Options } from './types';
 const parser = require('../native/index.node');
 
 export const DEFAULT_PORT = 20777;
+export const CLIENT_STARTED_ERROR_MESSAGE = 'Client was already started';
 
 class TelemetryClient extends EventEmitter {
   port: number;
   socket: dgram.Socket | undefined;
+  verbose: boolean;
+  isRunning: boolean;
 
   constructor(opts: Options = {}) {
     super();
 
-    const { port = DEFAULT_PORT } = opts;
+    const { port = DEFAULT_PORT, verbose = true } = opts;
 
     this.port = port;
-    this.socket = dgram.createSocket('udp4');
+    this.verbose = verbose;
+    this.isRunning = false;
   }
 
   parseMessage(m: Buffer) {
@@ -29,9 +33,11 @@ class TelemetryClient extends EventEmitter {
   }
 
   start() {
-    if (!this.socket) {
-      return;
+    if (this.isRunning) {
+      throw CLIENT_STARTED_ERROR_MESSAGE;
     }
+
+    this.socket = dgram.createSocket('udp4');
 
     this.socket.on('listening', () => {
       if (!this.socket) {
@@ -39,23 +45,40 @@ class TelemetryClient extends EventEmitter {
       }
 
       const address: AddressInfo = this.socket.address() as AddressInfo;
-      console.log(`UDP socket listening on ${address.address}:${address.port}`);
+
+      if (this.verbose) {
+        console.log(
+          `UDP socket listening on ${address.address}:${address.port}`
+        );
+      }
+
       this.socket.setBroadcast(true);
     });
 
     this.socket.on('message', m => this.parseMessage(m));
+
     this.socket.bind(this.port);
+
+    this.isRunning = true;
   }
 
   stop() {
-    if (!this.socket) {
+    if (!this.isRunning) {
       return;
     }
 
-    return this.socket.close(() => {
-      console.log(`UDP socket closed`);
-      this.socket = undefined;
-    });
+    return (
+      this.socket &&
+      this.socket.close(() => {
+        if (this.verbose) {
+          console.log(`UDP socket closed`);
+        }
+
+        this.socket = undefined;
+
+        this.isRunning = false;
+      })
+    );
   }
 }
 
