@@ -15,10 +15,6 @@
     "lib": "lib"
   },
   "files": [
-    "native/src",
-    "native/Cargo.lock",
-    "native/Cargo.toml",
-    "native/build.rs",
     "native/index.node",
     "build"
   ],
@@ -38,8 +34,7 @@
   "license": "MIT",
   "dependencies": {
     "neon-cli": "^0.3.3",
-    "node-pre-gyp": "amilajack/node-pre-gyp#neon-compat",
-    "node-pre-gyp-github": "^1.4.3"
+    "node-pre-gyp": "amilajack/node-pre-gyp#neon-compat"
   },
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
@@ -56,7 +51,7 @@
   "binary": {
     "module_name": "index",
     "host": "https://github.com/race-hub/f1-game-udp-parser/releases/download/",
-    "remote_path": "{version}",
+    "remote_path": "v{version}",
     "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
     "module_path": "./native",
     "pkg_path": "."

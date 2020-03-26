@@ -1,6 +1,6 @@
 # F1 Game UDP Parser
 
-![Travis (.com)](https://img.shields.io/travis/com/race-hub/f1-game-udp-parser?style=for-the-badge)
+![Github Workflow Status](https://img.shields.io/github/workflow/status/race-hub/f1-game-udp-parser/CI?style=for-the-badge)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/race-hub/f1-game-udp-parser?style=for-the-badge)
 ![GitHub](https://img.shields.io/github/license/race-hub/f1-game-udp-parser?style=for-the-badge)
 
