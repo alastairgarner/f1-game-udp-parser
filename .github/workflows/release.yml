@@ -7,8 +7,34 @@ on:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
-  release:
+  create_release:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: false
+
+    - name: Copy release URL into file
+      run: |
+        mkdir release
+        printf "%s" "${{ steps.create_release.outputs.upload_url }}" > release/url.txt
+    - name: Stash file containing the release URL as an artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: release-url
+        path: ./release
+
+  build_and_upload:
     runs-on: ${{ matrix.os }}
+    needs: [create_release]
 
     strategy:
       matrix:
@@ -35,16 +61,14 @@ jobs:
           npm run build
           npm run package
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Retrieve stashed release URL
+        uses: actions/download-artifact@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: false
+          name: release-url
+
+      - name: Read release URL
+        id: get_release_url
+        run: echo ::set-output name=URL::$(cat release-url/url.txt)
 
       - name: Get node environment variables
         id: get_node_environment
@@ -60,7 +84,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.get_release_url.outputs.URL }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ${{ format('./build/stage/v{0}/node-v{1}-{2}-{3}.tar.gz', steps.package_version.outputs.version, steps.get_node_environment.outputs.node_module_version, steps.get_node_environment.outputs.platform, steps.get_node_environment.outputs.arch) }}
-          asset_name: ${{ format('build/stage/v{0}/node-v{1}-{2}-{3}.tar.gz', steps.package_version.outputs.version, steps.get_node_environment.outputs.node_module_version, steps.get_node_environment.outputs.platform, steps.get_node_environment.outputs.arch) }}
+          asset_name: ${{ format('node-v{0}-{1}-{2}.tar.gz', steps.get_node_environment.outputs.node_module_version, steps.get_node_environment.outputs.platform, steps.get_node_environment.outputs.arch) }}
           asset_content_type: application/gzip
