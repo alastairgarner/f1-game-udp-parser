@@ -15,6 +15,10 @@
     "lib": "lib"
   },
   "files": [
+    "native/src",
+    "native/Cargo.lock",
+    "native/Cargo.toml",
+    "native/build.rs",
     "native/index.node",
     "build"
   ],
