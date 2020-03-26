@@ -123,6 +123,10 @@ jobs:
     needs: [build_and_upload]
 
     steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        shell: bash
       - uses: actions/checkout@v2
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
@@ -130,6 +134,7 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
+      - run: npm version --no-git-tag-version ${{ steps.get_version.outputs.VERSION }}
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -139,6 +144,10 @@ jobs:
     needs: [build_and_upload]
 
     steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        shell: bash
       - uses: actions/checkout@v2
       # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v1
@@ -147,6 +156,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@race-hub'
       - run: npm install
-      - run: npm publish --access public
+      - run: npm version --no-git-tag-version ${{ steps.get_version.outputs.VERSION }}
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
