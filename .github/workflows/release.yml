@@ -26,7 +26,9 @@ jobs:
           git config user.email gh-actions-${GITHUB_ACTOR}@github.com
           git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           npm version --no-git-tag-version ${{ steps.get_version.outputs.VERSION }}
-          git push gh-origin HEAD:master --tags
+          git add package.json package-lock.json
+          git commit -m "${{ steps.get_version.outputs.VERSION }}"
+          git push gh-origin HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
