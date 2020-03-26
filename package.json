@@ -20,7 +20,7 @@
     "native/Cargo.toml",
     "native/build.rs",
     "native/index.node",
-    "build"
+    "lib"
   ],
   "author": "msansoni <f1-game-udp-parser@michaelsansoni.com>",
   "contributors": [
@@ -43,13 +43,12 @@
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
     "package": "node-pre-gyp package",
-    "upload-binary": "node-pre-gyp package && node-pre-gyp-github publish",
     "check": "gts check",
     "clean": "gts clean",
     "test": "jest --detectOpenHandles",
-    "prebuild": "rm -rf ./build",
+    "prebuild": "rm -rf ./lib",
     "build": "tsc",
-    "postbuild": "mv ./build/lib/* ./build/ && rm -rf ./build/lib",
+    "postbuild": "mv ./lib/lib/* ./lib/ && rm -rf ./build/lib",
     "fix": "gts fix"
   },
   "binary": {

@@ -2,9 +2,9 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": ".",
-    "outDir": "build",
+    "outDir": "lib",
     "esModuleInterop": true
   },
-  "include": ["lib/**/*.ts", "test/**/*.ts"],
-  "exclude": ["lib/mocks/*.ts", "lib/constants/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts"],
+  "exclude": ["src/mocks/*.ts", "src/constants/*.ts"]
 }
