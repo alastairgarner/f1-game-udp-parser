@@ -16,12 +16,16 @@ jobs:
         with:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        shell: bash
       - name: version and publish
         run: |
           git config user.name $GITHUB_ACTOR
           git config user.email gh-actions-${GITHUB_ACTOR}@github.com
           git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm version ${{ github.ref }}
+          npm version ${{ steps.get_version.outputs.VERSION }}
           git push gh-origin HEAD:master --tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
