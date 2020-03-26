@@ -7,6 +7,25 @@ on:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
+  upversion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: version and publish
+        run: |
+          git config user.name $GITHUB_ACTOR
+          git config user.email gh-actions-${GITHUB_ACTOR}@github.com
+          git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm version ${{ github.ref }}
+          git push gh-origin HEAD:master --tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   create_release:
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +53,7 @@ jobs:
 
   build_and_upload:
     runs-on: ${{ matrix.os }}
-    needs: [create_release]
+    needs: [upversion, create_release]
 
     strategy:
       matrix:
