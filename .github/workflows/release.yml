@@ -25,7 +25,7 @@ jobs:
           git config user.name $GITHUB_ACTOR
           git config user.email gh-actions-${GITHUB_ACTOR}@github.com
           git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm version --no-git-tag-version ${{ steps.get_version.outputs.VERSION }}
+          npm version --no-git-tag-version --allow-same-version ${{ steps.get_version.outputs.VERSION }}
           git add package.json package-lock.json
           git commit -m "${{ steps.get_version.outputs.VERSION }}"
           git push gh-origin HEAD:master
@@ -134,7 +134,7 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
-      - run: npm version --no-git-tag-version ${{ steps.get_version.outputs.VERSION }}
+      - run: npm version --no-git-tag-version --allow-same-version ${{ steps.get_version.outputs.VERSION }}
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -156,7 +156,7 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@race-hub'
       - run: npm install
-      - run: npm version --no-git-tag-version ${{ steps.get_version.outputs.VERSION }}
+      - run: npm version --no-git-tag-version --allow-same-version ${{ steps.get_version.outputs.VERSION }}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
