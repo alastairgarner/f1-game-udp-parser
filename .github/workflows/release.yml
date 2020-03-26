@@ -1,5 +1,5 @@
 
-name: Create, build, package and publish release
+name: Release
 
 on:
   push:
@@ -68,7 +68,7 @@ jobs:
 
       - name: Read release URL
         id: get_release_url
-        run: echo ::set-output name=URL::$(cat release-url/url.txt)
+        run: echo "::set-output name=URL::$(cat release-url/url.txt)"
 
       - name: Get node environment variables
         id: get_node_environment
