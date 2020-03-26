@@ -7,31 +7,6 @@ on:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
-  upversion:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-          registry-url: 'https://registry.npmjs.org'
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-        shell: bash
-      - name: version and publish
-        run: |
-          git config user.name $GITHUB_ACTOR
-          git config user.email gh-actions-${GITHUB_ACTOR}@github.com
-          git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm version --no-git-tag-version --allow-same-version ${{ steps.get_version.outputs.VERSION }}
-          git add package.json package-lock.json
-          git commit -m "${{ steps.get_version.outputs.VERSION }}"
-          git push gh-origin HEAD:master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   create_release:
     runs-on: ubuntu-latest
     steps:
@@ -59,7 +34,7 @@ jobs:
 
   build_and_upload:
     runs-on: ${{ matrix.os }}
-    needs: [upversion, create_release]
+    needs: [create_release]
 
     strategy:
       matrix:
@@ -123,10 +98,6 @@ jobs:
     needs: [build_and_upload]
 
     steps:
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-        shell: bash
       - uses: actions/checkout@v2
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
@@ -134,7 +105,6 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
-      - run: npm version --no-git-tag-version --allow-same-version ${{ steps.get_version.outputs.VERSION }}
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
