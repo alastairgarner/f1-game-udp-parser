@@ -39,7 +39,7 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest, windows-2019, ubuntu-18.04]
-        node: [ '12' ]
+        node: [ '12', '13' ]
 
     steps:
       - name: Check out Git repository
@@ -70,9 +70,13 @@ jobs:
         id: get_release_url
         run: echo "::set-output name=URL::$(cat release-url/url.txt)"
 
-      - name: Get node environment variables
-        id: get_node_environment
+      - name: Get environment variables
+        id: environment
         uses: msansoni/node-environment-action@v1
+
+      - name: Get node module version
+        id: node_module_version
+        run: echo "::set-output name=v::$(node -e 'version=process.versions.modules; console.log(version)')"
 
       - name: Get package version
         id: package_version
@@ -85,8 +89,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release_url.outputs.URL }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ${{ format('./build/stage/v{0}/node-v{1}-{2}-{3}.tar.gz', steps.package_version.outputs.version, steps.get_node_environment.outputs.node_module_version, steps.get_node_environment.outputs.platform, steps.get_node_environment.outputs.arch) }}
-          asset_name: ${{ format('node-v{0}-{1}-{2}.tar.gz', steps.get_node_environment.outputs.node_module_version, steps.get_node_environment.outputs.platform, steps.get_node_environment.outputs.arch) }}
+          asset_path: ${{ format('./build/stage/v{0}/node-v{1}-{2}-{3}.tar.gz', steps.package_version.outputs.version, steps.node_module_version.outputs.v, steps.environment.outputs.platform, steps.environment.outputs.arch) }}
+          asset_name: ${{ format('node-v{0}-{1}-{2}.tar.gz', steps.node_module_version.outputs.v, steps.environment.outputs.platform, steps.environment.outputs.arch) }}
           asset_content_type: application/gzip
 
   publish_npm:
@@ -116,6 +120,7 @@ jobs:
         with:
           node-version: '12.x'
           registry-url: 'https://npm.pkg.github.com'
+          scope: '@race-hub'
       - run: npm install
       - run: npm publish --access public
         env:
