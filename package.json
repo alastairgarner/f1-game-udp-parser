@@ -48,7 +48,7 @@
     "test": "jest --detectOpenHandles",
     "prebuild": "rm -rf ./lib",
     "build": "tsc",
-    "postbuild": "mv ./lib/lib/* ./lib/ && rm -rf ./build/lib",
+    "postbuild": "mv ./lib/src/* ./lib/ && rm -rf ./build/lib",
     "fix": "gts fix"
   },
   "binary": {
