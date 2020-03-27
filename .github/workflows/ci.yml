@@ -29,5 +29,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          neon clean
+          neon build --release
           npm run build
           npm test

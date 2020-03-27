@@ -108,8 +108,6 @@ jobs:
           npm install
           npm run build
           npm run package
-          npm pack --dry-run
-          npm publish --dry-run
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
