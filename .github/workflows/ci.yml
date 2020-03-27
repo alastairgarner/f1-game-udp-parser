@@ -26,6 +26,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install --global neon-cli
+          npm install
+          neon clean
           neon build --release
           npm run build
 
