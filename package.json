@@ -20,8 +20,7 @@
     "native/Cargo.toml",
     "native/build.rs",
     "native/index.node",
-    "lib",
-    "src"
+    "lib/"
   ],
   "author": "msansoni <f1-game-udp-parser@michaelsansoni.com>",
   "contributors": [
@@ -42,7 +41,6 @@
     "node-pre-gyp": "amilajack/node-pre-gyp#neon-compat"
   },
   "scripts": {
-    "preinstall": "npm run build",
     "install": "node-pre-gyp install --fallback-to-build=false || neon build --release",
     "package": "node-pre-gyp package",
     "check": "gts check",
