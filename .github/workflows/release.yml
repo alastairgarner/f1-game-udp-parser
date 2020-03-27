@@ -70,9 +70,9 @@ jobs:
         id: get_release_url
         run: echo "::set-output name=URL::$(cat release-url/url.txt)"
 
-      - name: Get environment variables
-        id: environment
-        uses: msansoni/node-environment-action@v1
+      - name: Get runner environment variables
+        id: runner-environment
+        uses: msansoni/runner-environment-action@v1
 
       - name: Get node module version
         id: node_module_version
@@ -89,8 +89,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release_url.outputs.URL }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ${{ format('./build/stage/v{0}/node-v{1}-{2}-{3}.tar.gz', steps.package_version.outputs.version, steps.node_module_version.outputs.v, steps.environment.outputs.platform, steps.environment.outputs.arch) }}
-          asset_name: ${{ format('node-v{0}-{1}-{2}.tar.gz', steps.node_module_version.outputs.v, steps.environment.outputs.platform, steps.environment.outputs.arch) }}
+          asset_path: ${{ format('./build/stage/v{0}/node-v{1}-{2}-{3}.tar.gz', steps.package_version.outputs.version, steps.node_module_version.outputs.v, steps.runner-environment.outputs.platform, steps.runner-environment.outputs.arch) }}
+          asset_name: ${{ format('node-v{0}-{1}-{2}.tar.gz', steps.node_module_version.outputs.v, steps.runner-environment.outputs.platform, steps.runner-environment.outputs.arch) }}
           asset_content_type: application/gzip
 
   publish:

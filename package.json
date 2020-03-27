@@ -66,5 +66,29 @@
     "jest": "^25.1.0",
     "ts-jest": "^25.2.0",
     "typescript": "~3.7.0"
-  }
+  },
+  "keywords": [
+    "automotive",
+    "grand prix",
+    "f12019",
+    "f1 2019",
+    "formula 1",
+    "f1",
+    "codemasters",
+    "udp",
+    "telemetry",
+    "racing",
+    "simracing",
+    "gaming",
+    "formula",
+    "ps4",
+    "xbox",
+    "xbox one",
+    "playstation",
+    "playstation 4",
+    "esports",
+    "e sports",
+    "e-sports",
+    "videogame"
+  ]
 }
