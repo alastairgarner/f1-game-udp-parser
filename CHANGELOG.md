@@ -1,4 +1,4 @@
-# 0.1.6 (2020.)
+# 0.1.29 (2020.03.27)
 - Move to GitHub Actions
 - Initialise socket in `start` to enable re-starting of client
 

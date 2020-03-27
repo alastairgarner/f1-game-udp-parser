@@ -72,3 +72,7 @@ All of which are licensed under the MIT License, as is this project.
 
 - [ ] Move UDP socket and EventEmitter to Rust
 - [ ] Improve packet dependent logic inside Rust parser
+
+## Making a release
+`npm version vx.x.x`
+`git push --follow-tags`
