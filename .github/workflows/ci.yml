@@ -21,15 +21,15 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: npm install
+      - name: Compile and build package
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm install
+          neon build --release
+          npm run build
 
       - name: npm test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          neon clean
-          neon build --release
-          npm run build
           npm test
