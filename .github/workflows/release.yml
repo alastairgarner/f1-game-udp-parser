@@ -60,6 +60,8 @@ jobs:
         run: |
           npm run build
           npm run package
+          npm pack --dry-run
+          npm publish --dry-run
 
       - name: Retrieve stashed release URL
         uses: actions/download-artifact@v1
@@ -104,7 +106,10 @@ jobs:
         with:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install
+      - run: |
+        npm install
+        npm pack --dry-run
+        npm publish --dry-run
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

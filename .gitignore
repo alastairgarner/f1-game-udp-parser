@@ -4,5 +4,6 @@ native/artifacts.json
 **/*~
 **/node_modules
 **/.DS_Store
-lib
-*.tar.gz
+lib/
+build/
+*.tgz

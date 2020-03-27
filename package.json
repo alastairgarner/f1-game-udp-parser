@@ -2,7 +2,7 @@
   "name": "f1-game-udp-parser",
   "version": "0.1.25",
   "description": "Rust built Node compatible udp parser for Codemaster's Formula 1 games",
-  "main": "build/index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/race-hub/f1-game-udp-parser.git"
@@ -48,7 +48,7 @@
     "test": "jest --detectOpenHandles",
     "prebuild": "rm -rf ./lib",
     "build": "tsc",
-    "postbuild": "mv ./lib/src/* ./lib/ && rm -rf ./build/lib",
+    "postbuild": "mv ./lib/src/* ./lib/ && rm -rf ./lib/src",
     "fix": "gts fix"
   },
   "binary": {
