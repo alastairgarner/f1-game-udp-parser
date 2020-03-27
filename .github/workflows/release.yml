@@ -107,9 +107,9 @@ jobs:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
       - run: |
-        npm install
-        npm pack --dry-run
-        npm publish --dry-run
+          npm install
+          npm pack --dry-run
+          npm publish --dry-run
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
