@@ -33,6 +33,10 @@ export interface EventCodes {
   [name: string]: string;
 }
 
+export interface Teams {
+  [index: number]: Team;
+}
+
 export interface Team {
   name: string;
   color: string;
