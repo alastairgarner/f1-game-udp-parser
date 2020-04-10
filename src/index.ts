@@ -6,7 +6,7 @@ import { EventEmitter } from 'events';
 import { AddressInfo } from 'net';
 import { Options } from './types';
 
-import * as parser from '../native/index.node';
+const parser = require('../native/index');
 
 export const DEFAULT_PORT = 20777;
 export const CLIENT_STARTED_ERROR_MESSAGE = 'Client was already started';
